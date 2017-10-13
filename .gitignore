@@ -38,3 +38,7 @@ packages/
 
 Project/Debug/**
 Project/Release/**
+
+.vs/
+
+x64/
