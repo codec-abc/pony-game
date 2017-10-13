@@ -27,7 +27,7 @@ class FallSystem is (GameSystem & EventListener)
       true
     else
       try
-        let fall_component = _game.entity_manager().get_component[FallComponent](_falling_block, "FallComponent")
+        let fall_component = _game.entity_manager().get_component[FallComponent](_falling_block, "FallComponent")?
         
         if fall_component.last_fall_time == 0 then
             // Setup initial timer.
@@ -36,7 +36,7 @@ class FallSystem is (GameSystem & EventListener)
 
         if (_game.clock().elapsed_millis() - fall_component.last_fall_time) >= _stay_duration_millis then
           // Fall down.
-          let position_component = _game.entity_manager().get_component[PositionComponent](_falling_block, "PositionComponent")
+          let position_component = _game.entity_manager().get_component[PositionComponent](_falling_block, "PositionComponent")?
           position_component.y = position_component.y + 1
 
           // Update timer.

@@ -29,13 +29,13 @@ class FpsCounter
     // http://stackoverflow.com/a/87732/1700174
     try
         // Subtract oldest buffered value.
-        _tick_sum = _tick_sum - _tick_buffer(_tick_index)
+        _tick_sum = _tick_sum - _tick_buffer(_tick_index)?
         
         // Add new value.
         _tick_sum = _tick_sum + tick_time
         
         // Buffer new value.
-        _tick_buffer(_tick_index) = tick_time
+        _tick_buffer(_tick_index)? = tick_time
         
         // Increase buffer index.
         _tick_index = _tick_index + 1

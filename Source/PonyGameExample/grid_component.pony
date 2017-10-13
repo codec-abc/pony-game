@@ -19,10 +19,10 @@ class GridComponent is EntityComponent
       var col = Array[I32](_height)
 
       for y in Range[USize](0, _height) do
-        col = col.push(0)
+        col.push(0)
       end
 
-      grid = grid.push(col)
+      grid.push(col)
     end
     
 

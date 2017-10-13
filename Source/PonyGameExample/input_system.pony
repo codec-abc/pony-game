@@ -23,8 +23,8 @@ class InputSystem is GameSystem
 
   fun ref update(): Bool =>
     try
-      let position_component = _game.entity_manager().get_component[PositionComponent](_falling_block, "PositionComponent")
-      let grid_component = _game.entity_manager().get_component[GridComponent](_falling_block, "GridComponent")
+      let position_component = _game.entity_manager().get_component[PositionComponent](_falling_block, "PositionComponent")?
+      let grid_component = _game.entity_manager().get_component[GridComponent](_falling_block, "GridComponent")?
 
       // Handle input.
       if (position_component.x > 0) and (_game.input().dpad_left_just_pressed(0)) then

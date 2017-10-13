@@ -14,14 +14,14 @@ class ResourceManager
 
   fun get_image(image: String): I32 ? =>
     try
-      _images(image)
+      _images(image)?
     else
       error
     end
 
   fun ref load_image(image: String): I32 =>
     try
-      _images(image)
+      _images(image)?
     else
       var image_id: I32 = @LoadImageResource(image.cstring())
       _images(image) = image_id
@@ -32,7 +32,7 @@ class ResourceManager
     let text_format = TextFormat(font_name, font_size, horizontal_alignment, vertical_alignment)
     
     try
-      _text_formats(text_format)
+      _text_formats(text_format)?
     else
       error
     end
@@ -41,7 +41,7 @@ class ResourceManager
     let text_format = TextFormat(font_name, font_size, horizontal_alignment, vertical_alignment)
     
     try
-      _text_formats(text_format)
+      _text_formats(text_format)?
     else
       var text_format_id: I32 = @CreateTextFormat(font_name.cstring(), font_size, horizontal_alignment(), vertical_alignment())
       _text_formats(text_format) = text_format_id

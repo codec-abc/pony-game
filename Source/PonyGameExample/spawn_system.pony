@@ -13,7 +13,7 @@ class SpawnSystem is GameSystem
     _game = game
 
     let time = Time
-    let seed = time.wall_to_nanos(time.now())
+    let seed : U64 val = 0//time.wall_to_nanos(time.now())
     _random = MT(seed)
     
     
@@ -62,10 +62,10 @@ class SpawnSystem is GameSystem
 
       let grid_component = GridComponent(4, 1)
       try
-        grid_component.grid(0)(0) = 1
-        grid_component.grid(1)(0) = 1
-        grid_component.grid(2)(0) = 1
-        grid_component.grid(3)(0) = 1
+        grid_component.grid(0)?(0)? = 1
+        grid_component.grid(1)?(0)? = 1
+        grid_component.grid(2)?(0)? = 1
+        grid_component.grid(3)?(0)? = 1
       end
       _game.entity_manager().add_component(entity, grid_component)
     else
@@ -75,10 +75,10 @@ class SpawnSystem is GameSystem
 
       let grid_component = GridComponent(2, 2)
       try
-        grid_component.grid(0)(0) = 1
-        grid_component.grid(1)(0) = 1
-        grid_component.grid(0)(1) = 1
-        grid_component.grid(1)(1) = 1
+        grid_component.grid(0)?(0)? = 1
+        grid_component.grid(1)?(0)? = 1
+        grid_component.grid(0)?(1)? = 1
+        grid_component.grid(1)?(1)? = 1
       end
       _game.entity_manager().add_component(entity, grid_component)
     end

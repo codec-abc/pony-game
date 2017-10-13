@@ -34,3 +34,7 @@ Obj/
 *.opensdf
 Project/ipch/
 packages/
+
+
+Project/Debug/**
+Project/Release/**

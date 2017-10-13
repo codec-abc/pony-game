@@ -107,7 +107,7 @@ class Game
     let game_log_formatter: GameLogFormatter val = GameLogFormatter(_clock)
     try
       // Create log file.
-      let file_path = FilePath(_env.root as AmbientAuth, "ponygame.log")
+      let file_path = FilePath(_env.root as AmbientAuth, "ponygame.log")?
       let file = recover File(file_path) end
       let file_stream = FileStream(consume file)
 
@@ -132,7 +132,7 @@ class Game
     end
     
     try
-      var config_window_width = _config("WindowWidth").i32()
+      var config_window_width = _config("WindowWidth").i32()?
       
       if config_window_width > 0 then
         window_width = config_window_width
@@ -140,7 +140,7 @@ class Game
     end
     
     try
-      var config_window_height = _config("WindowHeight").i32()
+      var config_window_height = _config("WindowHeight").i32()?
       
       if config_window_height > 0 then
         window_height = config_window_height

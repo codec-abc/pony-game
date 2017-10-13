@@ -50,30 +50,30 @@ class GridSystem is GameSystem
     let block = event.entity
 
     try
-      let block_grid_component = _game.entity_manager().get_component[GridComponent](block, "GridComponent")
-      let block_image_component = _game.entity_manager().get_component[ImageComponent](block, "ImageComponent")
+      let block_grid_component = _game.entity_manager().get_component[GridComponent](block, "GridComponent")?
+      let block_image_component = _game.entity_manager().get_component[ImageComponent](block, "ImageComponent")?
       let block_image = _game.resource_manager().load_image(block_image_component.image) 
-      let game_grid_component = _game.entity_manager().get_component[GridComponent](_grid, "GridComponent")
+      let game_grid_component = _game.entity_manager().get_component[GridComponent](_grid, "GridComponent")?
 
       // Update grid.
       for x in Range[USize](0, block_grid_component.width()) do
         for y in Range[USize](0, block_grid_component.height()) do
-          if block_grid_component.grid(x)(y) > 0 then
+          if block_grid_component.grid(x)?(y)? > 0 then
             let old_grid_x = x + event.old_x.usize()
             let old_grid_y = y + event.old_y.usize()
 
-            game_grid_component.grid(old_grid_x)(old_grid_y) = 0
+            game_grid_component.grid(old_grid_x)?(old_grid_y)? = 0
           end
         end
       end
 
       for x in Range[USize](0, block_grid_component.width()) do
         for y in Range[USize](0, block_grid_component.height()) do
-          if block_grid_component.grid(x)(y) > 0 then
+          if block_grid_component.grid(x)?(y)? > 0 then
             let new_grid_x = x + event.new_x.usize()
             let new_grid_y = y + event.new_y.usize()
 
-            game_grid_component.grid(new_grid_x)(new_grid_y) = block_image
+            game_grid_component.grid(new_grid_x)?(new_grid_y)? = block_image
           end
         end
       end
@@ -89,12 +89,12 @@ class GridSystem is GameSystem
       if not grounded then
         // Check if hit another block.
         for x in Range[USize](0, block_grid_component.width()) do
-          if block_grid_component.grid(x)(0) > 0 then
+          if block_grid_component.grid(x)?(0)? > 0 then
             let grid_x = x + event.new_x.usize()
             let grid_y = block_grid_component.height() + event.new_y.usize()
 
             try
-              if game_grid_component.grid(grid_x)(grid_y) != 0 then
+              if game_grid_component.grid(grid_x)?(grid_y)? != 0 then
                 grounded = true
               end
             end 
@@ -119,13 +119,13 @@ class GridSystem is GameSystem
 
   fun ref _check_grid_lines(): None =>
     try
-      let game_grid_component = _game.entity_manager().get_component[GridComponent](_grid, "GridComponent")
+      let game_grid_component = _game.entity_manager().get_component[GridComponent](_grid, "GridComponent")?
 
       for y in Range[USize](0, game_grid_component.height()) do
         var line_complete: Bool = true
 
         for x in Range[USize](0, game_grid_component.width()) do
-          if game_grid_component.grid(x)(y) == 0 then
+          if game_grid_component.grid(x)?(y)? == 0 then
             line_complete = false
           end
         end
@@ -139,7 +139,7 @@ class GridSystem is GameSystem
           
           while y' > 0 do
             while x' < game_grid_component.width() do
-              game_grid_component.grid(x')(y') = game_grid_component.grid(x')(y' - 1)
+              game_grid_component.grid(x')?(y')? = game_grid_component.grid(x')?(y' - 1)?
               x' = x' + 1  
             end
            

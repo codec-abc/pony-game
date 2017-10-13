@@ -11,7 +11,7 @@ class EventManager
   fun ref process(): None =>
     while _events.size() > 0 do
       try
-        var event = _events.shift()
+        var event = _events.shift()?
         
         var listeners = _listener_list(event.event_type())
         
@@ -29,7 +29,7 @@ class EventManager
    
    fun ref _listener_list(event_type: String): List[EventListener] =>
      try
-       _listeners(event_type)
+       _listeners(event_type)?
      else
        let listener_list = List[EventListener]
        _listeners(event_type) = listener_list

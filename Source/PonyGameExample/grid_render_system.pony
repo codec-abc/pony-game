@@ -36,11 +36,11 @@ class GridRenderSystem is GameSystem
 
     // Draw all blocks.
     try
-      let grid = _game.entity_manager().get_component[GridComponent](_grid, "GridComponent")
+      let grid = _game.entity_manager().get_component[GridComponent](_grid, "GridComponent")?
 
       for x in Range[USize](0, grid.width()) do
         for y in Range[USize](0, grid.height()) do
-          let grid_color = grid.grid(x)(y)
+          let grid_color = grid.grid(x)?(y)?
 
           if grid_color != 0 then
             _game.renderer().draw_image(grid_color, x.f32() * _tile_size, y.f32() * _tile_size)
