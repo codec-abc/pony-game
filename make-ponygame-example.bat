@@ -9,7 +9,7 @@ COPY /Y "Bin\PonyGameNative\x64\Debug\PonyGameNative.lib" "Source\PonyGameNative
 ponyc -p "Bin\x64" -p "Source" -o Bin\PonyGameExample Source\PonyGameExample
 
 ECHO Copying native libs...
-COPY /Y "Bin\x64\Debug\PonyGameNative.dll" "Bin\PonyGameExample"
+COPY /Y "Bin\PonyGameNative\x64\Debug\PonyGameNative.dll" "Bin\PonyGameExample"
 
 ECHO Copying resources...
 COPY /Y "Source\PonyGame\*.ini" "Bin\PonyGameExample"
